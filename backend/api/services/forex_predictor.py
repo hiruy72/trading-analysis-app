@@ -1,15 +1,26 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
 class ForexPredictor:
     def __init__(self):
-        self.model = RandomForestClassifier(n_estimators=100, random_state=42)
-        self.scaler = StandardScaler()
+        self.model = None
+        self.scaler = None
         
+    def _ensure_model(self):
+        """
+        Lazy load model and scaler to save memory
+        """
+        if self.model is None:
+            # Lazy import sklearn to avoid high memory usage on startup
+            from sklearn.ensemble import RandomForestClassifier
+            from sklearn.preprocessing import StandardScaler
+            
+            # Use fewer estimators and limit depth to save memory
+            self.model = RandomForestClassifier(n_estimators=50, max_depth=10, random_state=42, n_jobs=1)
+            self.scaler = StandardScaler()
+
     def prepare_features(self, df):
         """
         Prepare features for ML model from OHLCV data
@@ -73,6 +84,8 @@ class ForexPredictor:
         Train model on historical data and predict next movement
         Returns: prediction (UP/DOWN), confidence (0-100)
         """
+        self._ensure_model()
+        
         X, y = self.prepare_features(df)
         
         if X is None or len(X) < 10:
