@@ -8,3 +8,7 @@ pandas
 python-dotenv
 scikit-learn
 numpy
+gunicorn
+dj-database-url
+psycopg2-binary
+whitenoise
