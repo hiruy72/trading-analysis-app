@@ -148,7 +148,7 @@ export default function Home() {
                   <option value="15m">⏱️ 15m</option>
                   <option value="1h">⏰ 1h</option>
                   <option value="4h">🕐 4h</option>
-                  <option value="1d">📅 1d</option>
+
                 </select>
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
