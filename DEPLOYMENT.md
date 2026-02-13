@@ -47,7 +47,9 @@ We recommend **Railway** or **Render** for easiest deployment of Python/Django a
 3. Connect your GitHub repo.
 4. **Build Command**: `pip install -r requirements.txt && python manage.py migrate`
 5. **Start Command**: `gunicorn config.wsgi:application`
-6. Add **Environment Variables** similarly to Railway.
+6. Add **Environment Variables**:
+   - `PYTHON_VERSION`: `3.12.3` (Recommended: Python 3.12 works best with current libraries)
+   - Plus variables from Railway section (SECRET_KEY, ALLOWED_HOSTS, etc.)
 
 ---
 
@@ -88,3 +90,22 @@ Once both are deployed:
 - Open your Vercel URL.
 - Check if data loads (charts, signals).
 - If you see CORS errors in browser console, double-check `CORS_ALLOWED_ORIGINS` on backend.
+
+---
+
+## 🛠️ Troubleshooting
+
+### Issue: Data is not loading (Requests are pending or failing)
+**Cause:** The frontend doesn't know where the backend is, or it's trying to connect to `localhost`.
+**Fix:**
+1. Go to your **Vercel Project Settings** -> **Environment Variables**.
+2. Ensure `NEXT_PUBLIC_API_URL` is set.
+   - It must be the **full URL** of your backend (e.g., `https://your-app-name.railway.app/api`).
+   - Note: Do not include a trailing slash after `/api`.
+   - **Important:** If your backend is on `http` (unsecure) and frontend is `https`, browsers will block it. Ensure backend is `https`.
+
+### Issue: CORS Error (Cross-Origin Request Blocked)
+**Cause:** The backend is rejecting requests from your Vercel domain.
+**Fix:**
+1. Check `backend/settings.py` or your Railway variables.
+2. Ensure `CORS_ALLOWED_ORIGINS` contains your Vercel URL (e.g., `https://trading-analysis-app-neon.vercel.app`).

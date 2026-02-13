@@ -22,6 +22,8 @@ export default function Home() {
     setError(null);
 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api';
+    console.log('Fetching data from:', apiUrl); // Debugging log
+
 
     if (marketType === 'forex') {
       // Fetch forex prediction

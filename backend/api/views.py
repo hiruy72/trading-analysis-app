@@ -11,6 +11,7 @@ def health_check(request):
 @api_view(['GET'])
 def get_market_analysis(request):
     # Parameters
+    print(f"🔍 Request received for market analysis: {request.GET}")
     symbol = request.GET.get('symbol', 'BTC/USDT') # Default crypto
     market_type = request.GET.get('type', 'crypto') # crypto or stock
     timeframe = request.GET.get('timeframe', '1h')
