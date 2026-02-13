@@ -1,0 +1,10 @@
+django
+djangorestframework
+django-cors-headers
+ccxt
+yfinance
+pandas-ta
+pandas
+python-dotenv
+scikit-learn
+numpy
