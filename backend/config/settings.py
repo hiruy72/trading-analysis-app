@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-m3c-$#bcvn1r)3v08s97!_idow*9ifap8m(3y$w5#lb%m05vx(
 DEBUG = True
 
 import os
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = ['*'] # Debugging: Allow all hosts to rule out 400/500 errors
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
